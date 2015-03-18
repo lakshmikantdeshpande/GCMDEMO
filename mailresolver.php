@@ -4,8 +4,9 @@ mysql_connect('localhost', 'root', '');
 mysql_select_db('gcm');
 
 $email=$_POST['email'];
+$password=$_POST['password'];
 
-$sql="select * from registration where email='$email'";
+$sql="select * from registration where email='$email' and password='$password'";
 
 $records=mysql_query($sql);
   
@@ -18,10 +19,12 @@ if(!empty($record['gcm']))
 	header('Location: ' . $sendmail);
 }
 else if (!empty($record['mpns']))
-	echo $record['mpns'];
+	echo $record['mpns']; 
 else
 {
-	//echo "This user is not registered !!"
-	http_response_code(404);
+	echo "This user is not registered !!";
+	header('http/1.0 404 not found');
+	echo "<html><br></html>";
+	var_dump(http_response_code());
 }
 ?>
