@@ -6,7 +6,7 @@ mysql_select_db('gcm');
 $email=$_POST['email'];
 //$password=$_POST['password'];
 
-$sql="select * from registration where email='$email'";
+$sql="select * from registration where email='$email' and enabled=1";
 
 $records=mysql_query($sql);
   
